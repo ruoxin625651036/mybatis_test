@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+    <!--用于指定数据库驱动jar包所在路径-->
+    <classPathEntry location="mysql-connector-java-5.1.26.jar"/>
+    <context id="DB" targetRuntime="MyBatis3">
+        <!--jdbc连接配置-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/test"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <!--指定生成model方式-->
+        <!--targetPackage:生成实体类存放的包名，一般就是放在该包下-->
+        <!--targetProject:指定目标项目路径，可以是绝对路径或相对路径，该目录必须存在-->
+        <javaModelGenerator targetPackage="com.dyj.model" targetProject="../src/main/java">
+            <!--enableSubPackages:如果true，MBG会根据catalog和schema来生成子包。
+            如果false就会直接用targetPackage属性。默认为false。-->
+            <property name="enableSubPackages" value="true"/>
+        </javaModelGenerator>
+
+        <!--指定生成map.xml的方式-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="../src/main/resource">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--指定生成mapper文件的方式-->
+        <!--javaClientGenerator中的type值必须设置，可以为以下四种
+            MAPPER: mapper文件无注解，会有相应的的xml文件生成
+            XMLMAPPER:同MAPPER
+            MIXEDMAPPER: 混合式，mapper文件既有注解，也会有xml文件生成
+            ANNOTATEDMAPPER:生成基于注解的mapper文件，同时不会生成mapper.xml文件
+        -->
+        <javaClientGenerator type="MAPPER" targetPackage="com.dyj.mapper" targetProject="../src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <!--指定所针对的table-->
+        <!--生成所有的表可使用 <table tableName="%" /> 来表示-->
+        <table tableName="student">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="teacher">
+            <!--使用的将是SelectKeyGenerator,
+            identity的含义为true时，表示设置自增主键的操作在insert语句之后;
+            identity的含义为false时，表示设置自增主键的操作在insert语句之后,默认为false。 对于mysql来说，应该设置在insert语句之后
+            -->
+            <!--sqlStatement：当值为MySql时，生成的selectKey标签中的sql语句will translate to: SELECT LAST_INSERT_ID()-->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
