@@ -24,7 +24,7 @@
         </javaModelGenerator>
 
         <!--指定生成map.xml的方式-->
-        <sqlMapGenerator targetPackage="mapper" targetProject="../src/main/resource">
+        <sqlMapGenerator targetPackage="mapper.auto" targetProject="../src/main/resource">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 

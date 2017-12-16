@@ -32,18 +32,21 @@ public class InsertData {
             TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
             Teacher teacher = new Teacher();
             teacher.setName("zhangsan");
-            // 当执行insert语句后，可以填充id值，这个由什么来设置？
-            // 这个存在两个实现，一是在insert标签下添加子标签SelectKey或者是添加属性useGeneratedKeys
-            // 如果insert标签下两个都存在，则以SelectKey为准
             teacherMapper.insert(teacher);
-            sqlSession.commit();
 
             StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
             Student student = new Student();
             student.setName("xiaoming");
+            // 由selectKey实现的
             student.setTeacherId(teacher.getId());
             studentMapper.insert(student);
 
+            Student student2 = new Student();
+            student2.setName("xiaozhang");
+            student2.setTeacherId(teacher.getId());
+            studentMapper.insert(student2);
+
+            // 在默认情况下事务提交commit是false
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();

@@ -45,8 +45,8 @@
     </environments>
 
     <mappers>
-        <mapper resource="mapper/StudentMapper.xml"/>
-        <mapper resource="mapper/TeacherMapper.xml"/>
+        <mapper resource="mapper/auto/StudentMapper.xml"/>
+        <mapper resource="mapper/auto/TeacherMapper.xml"/>
     </mappers>
 
 </configuration>
