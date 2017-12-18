@@ -1,6 +1,6 @@
 # demo for resultMap
 
-1. first, create table, see create_table.sh  
+1. 建表 see create_table.sh  
 
 
 2. 配置mysql的用户名和密码, see conf/db.properties and resource/db.properties  
