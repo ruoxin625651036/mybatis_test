@@ -22,4 +22,13 @@
         </dependency>
     </dependencies>
 
+    <!--超级pom中有哪些插件，哪些因为版本或者其他问题需要覆写？
+        maven中常用的插件还有哪些？
+    -->
+    <build>
+        <plugins>
+
+        </plugins>
+    </build>
+
 </project>
