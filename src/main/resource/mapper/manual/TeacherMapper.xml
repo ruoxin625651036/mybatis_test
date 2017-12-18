@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dyj.mapper.manual.TeacherWithStudentsMapper">
+    <!--可以使用两个mapper.xml文件对应同一个Mapper接口,
+    判断resource是否加载的条件是判断mapper标签的resource所表示的string是否加载，
+    所有将它们放在不同的路径下，并不会冲突，而是都会加载进去-->
+    <!--add by manual-->
+    <resultMap id="student" type="com.dyj.model.Student">
+        <id column="s_id" jdbcType="INTEGER" property="id"/>
+        <result column="s_name" jdbcType="VARCHAR" property="name"/>
+        <result column="s_teacher_id" jdbcType="INTEGER" property="teacherId"/>
+    </resultMap>
+    <resultMap id="teacherWithStudents" type="com.dyj.dto.TeacherWithStudents">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection property="students" resultMap="student"/>
+    </resultMap>
+    <select id="getStudents" parameterType="int" resultMap="teacherWithStudents">
+         select t.id as id, t.name as name, s.id as s_id, s.name as s_name, s.teacher_id as s_teacher_id from teacher
+        as t,student  as s
+        where
+         t.id = #{id} and s.teacher_id = t.id;
+    </select>
+</mapper>

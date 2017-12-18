@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.dyj.dto.TeacherWithStudents;
 import com.dyj.mapper.TeacherMapper;
+import com.dyj.mapper.manual.TeacherWithStudentsMapper;
 import com.dyj.model.Student;
 
 /**
@@ -29,17 +30,20 @@ public class Main {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
             SqlSession sqlSession = sqlSessionFactory.openSession();
 
-            TeacherMapper teacherMapper  = sqlSession.getMapper(TeacherMapper.class);
-            TeacherWithStudents teacherWithStudents = teacherMapper.getStudents(6);
-            System.out.println(teacherWithStudents.getId());
-            System.out.println(teacherWithStudents.getName());
-            System.out.println("Students:");
-            int i = 1;
-            for (Student student : teacherWithStudents.getStudents()) {
-                System.out.println( i + ": " + student.getName());
-                i++;
+            TeacherWithStudentsMapper teacherMapper  = sqlSession.getMapper(TeacherWithStudentsMapper.class);
+            TeacherWithStudents teacherWithStudents = teacherMapper.getStudents(1);
+            if (null != teacherWithStudents) {
+                System.out.println(teacherWithStudents.getId());
+                System.out.println(teacherWithStudents.getName());
+                if (null != teacherWithStudents.getStudents()) {
+                    System.out.println("Students:");
+                    int i = 1;
+                    for (Student student : teacherWithStudents.getStudents()) {
+                        System.out.println(i + ": " + student.getName());
+                        i++;
+                    }
+                }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }

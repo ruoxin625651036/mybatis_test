@@ -4,14 +4,18 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 
 <generatorConfiguration>
+    <!--resource和url是有区别的，resource是指通过ClassLoader来创建的，相对于classpath而言的，
+    所有在运行的时候应该添加.:当前路径在classpath中；url则是通过URL来创建的
+    -->
+    <properties resource="db.properties"/>
     <!--用于指定数据库驱动jar包所在路径-->
     <classPathEntry location="mysql-connector-java-5.1.26.jar"/>
     <context id="DB" targetRuntime="MyBatis3">
         <!--jdbc连接配置-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/test"
-                        userId="root"
-                        password="123456">
+        <jdbcConnection driverClass="${driver}"
+                        connectionURL="${url}"
+                        userId="${username}"
+                        password="${password}">
         </jdbcConnection>
 
         <!--指定生成model方式-->
