@@ -27,7 +27,40 @@
     -->
     <build>
         <plugins>
-
+            <plugin>
+                <!--maven默认提供了编译插件，在编译插件中涉及Java的编译级别-->
+                <!--默认为jdk6，需要进行修改,现在找不到了这个设置？？-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!--生成的jar包添加依赖jar包-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <!--版本号可能需要更新-->
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <!-- 绑定到package生命周期阶段上 -->
+                        <phase>package</phase>
+                        <goals>
+                            <!-- 绑定到package生命周期阶段上 -->
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

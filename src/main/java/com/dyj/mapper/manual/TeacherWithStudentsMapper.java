@@ -5,7 +5,7 @@ import com.dyj.dto.TeacherWithStudents;
 /**
  * a little description
  *
- * @author duanyuejiao
+ * @author dyj
  */
 public interface TeacherWithStudentsMapper {
 

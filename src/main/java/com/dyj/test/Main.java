@@ -20,7 +20,7 @@ import com.dyj.model.Student;
 /**
  * a little description
  *
- * @author duanyuejiao
+ * @author dyj
  */
 public class Main {
     public static void main(String[] args) {

@@ -20,7 +20,7 @@ import com.dyj.model.Teacher;
 /**
  * a little description
  *
- * @author duanyuejiao
+ * @author dyj
  */
 public class InsertData {
     public static void main(String[] args) {
